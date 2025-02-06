@@ -1,3 +1,4 @@
+# === TUNSHELL PYTHON3 SCRIPT ===
 import platform
 import tempfile
 import urllib.request
@@ -35,6 +36,7 @@ def get_target():
     return targets[system][arch]
     
 def run():
+    print('Installing client...')
     target = get_target()
 
     with tempfile.NamedTemporaryFile(delete=False) as tmp:
@@ -42,12 +44,12 @@ def run():
         tmp.write(r.read())
         tmp.close()
         try:
-            os.chmod(tmp.name, 0o755)
-            subprocess.run([tmp.name] + sys.argv[1:])
+          os.chmod(tmp.name, 0o755)
+          subprocess.run([tmp.name] + p)
         finally:
-            try:
-                os.unlink(tmp.name)
-            except:
-                pass
+          try:
+            os.unlink(tmp.name)
+          except:
+            pass
 
 run()
